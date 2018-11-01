@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hui.base.springboot.mapper.UpdateLogMapper">
+  <resultMap id="BaseResultMap" type="com.hui.base.springboot.model.UpdateLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="word_add" jdbcType="BIGINT" property="wordAdd" />
+    <result column="title_add" jdbcType="BIGINT" property="titleAdd" />
+    <result column="needtime" jdbcType="VARCHAR" property="needtime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_analysis_updatelog
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hui.base.springboot.model.UpdateLog">
+    insert into t_analysis_updatelog (id, update_time, word_add, 
+      title_add, needtime)
+    values (#{id,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{wordAdd,jdbcType=BIGINT}, 
+      #{titleAdd,jdbcType=BIGINT}, #{needtime,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hui.base.springboot.model.UpdateLog">
+    update t_analysis_updatelog
+    set update_time = #{updateTime,jdbcType=TIMESTAMP},
+      word_add = #{wordAdd,jdbcType=BIGINT},
+      title_add = #{titleAdd,jdbcType=BIGINT},
+      needtime = #{needtime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, update_time, word_add, title_add, needtime
+    from t_analysis_updatelog
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, update_time, word_add, title_add, needtime
+    from t_analysis_updatelog
+  </select>
+</mapper>
