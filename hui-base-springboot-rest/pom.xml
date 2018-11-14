@@ -69,6 +69,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!--热部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <scope>true</scope>
+        </dependency>
         <!-- test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -105,11 +112,22 @@
     </dependencies>
 
     <build>
-        <finalName>hui-base-springboot-back-${project.parent.version}</finalName>
         <plugins>
             <plugin>
+                <configuration>
+                    <fork>true</fork>
+                    <finalName>hui-base-springboot-test-${project.parent.version}</finalName>
+                    <mainClass>com.XXXXXXXXX.Application</mainClass>
+                </configuration>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal><!--可以把依赖的包都打包到生成的Jar包中-->
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
