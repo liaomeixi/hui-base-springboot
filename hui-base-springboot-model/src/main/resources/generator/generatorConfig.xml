@@ -7,7 +7,7 @@
     <!--<properties resource="application.properties" />-->
 
     <!-- MyBatis3Simple：不生成 Example相关类及方法 -->
-    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+    <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
 
         <!-- 生成的Java文件的编码-->
         <property name="javaFileEncoding" value="UTF-8"/>
@@ -34,7 +34,7 @@
 
         <!-- jdbc 连接配置 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/hui?characterEncoding=UTF-8"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/springcloud?characterEncoding=UTF-8"
                         userId="root"
                         password="123456">
         </jdbcConnection>
@@ -58,17 +58,18 @@
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
         </table>-->
 
-        <table tableName="t_analysis_updatelog" domainObjectName="UpdateLog"></table>
-        <table tableName="t_news_exclude" domainObjectName="Exclude"></table>
-        <table tableName="t_news_headlines" domainObjectName="HeadLines"></table>
-        <table tableName="t_news_words" domainObjectName="Words"></table>
-        <table tableName="t_portal" domainObjectName="Portal"></table>
-        <table tableName="t_user" domainObjectName="User"></table>
-        <table tableName="t_website" domainObjectName="WebSite"></table>
+        <!-- Mysql 配置 -->
+         <generatedKey column="id" sqlStatement="Mysql" identity="true" />
 
+        <table tableName="hui_msg_message" domainObjectName="Message"
+            enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+            enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
 
-
-
+        <table tableName="hui_account_user" domainObjectName="User"
+           enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+           enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
 
     </context>
 </generatorConfiguration>
