@@ -11,3 +11,5 @@ spring:
     schema: classpath:tables_init.sql
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
