@@ -9,6 +9,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 /**
  * <b><code>WebLogAspect</code></b>
@@ -41,7 +42,7 @@ public class WebLogAspect {
      * @since hui_project v1
      */
     @Pointcut(value = "execution(public * com.hui.base.springboot.server.service..*.*(..))")
-    public void webServiceErrorLog(){}
+    public void webServiceLog(){}
 
 
     /**
@@ -55,34 +56,46 @@ public class WebLogAspect {
     public void controllerBefore(JoinPoint joinPoint){
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
-
+        log.info("\n");
         log.info("-------------------Request Content-------------------");
         log.info("[Request IP] : {}",request.getRemoteAddr());
         log.info("[Request URL] : {} ",request.getRequestURL());
         log.info("[Request Method] : {}", request.getMethod());
         log.info("[Class Method] : {}",joinPoint.getSignature());
-        log.info("[Class Args] : {}",joinPoint.getArgs());
+        Object[] args = joinPoint.getArgs();
+        if (args==null){
+            log.info("[Args is NULL] : {}", "NULL");
+        }else {
+            log.info("[Class Method Args] : " + Arrays.toString(args));
+        }
         log.info("-------------------Request Content-------------------");
+        log.info("\n");
     }
 
-
     /**
-     * 异常通知 记录service抛异常的信息.
+     * 前置通知 记录service调用的日志.
      *
      * @param joinPoint the join point
-     * @param error     the error
      * @author HuWeihui
      * @since hui_project v1
      */
-    @AfterThrowing(value = "webServiceErrorLog()",throwing = "error")
-    public void serviceAfterThrowing(JoinPoint joinPoint,Throwable error){
-        log.error("-------------------Service Throwable Content-------------------");
-        log.error("[Service Throwable Class] : {}",error.getClass().getName());
-        log.error("[Service Throwable Msg] : {}",error.getMessage());
-        log.error("[Service Throwable Method] : {}->{}()",joinPoint.getTarget().getClass().getName(),joinPoint.getSignature().getName());
-        log.error("[Service Throwable Method Args] : {}",joinPoint.getArgs());
-        log.error("-------------------Service Throwable Content-------------------");
+    @Before(value = "webServiceLog()")
+    public void serviceBefore(JoinPoint joinPoint){
+        log.info("\n");
+        log.info("-------------------Service Content-------------------");
+        log.info("[Service Class] : {}",joinPoint.getTarget().getClass().getName());
+        log.info("[Service Method] : {}",joinPoint.getSignature().getName());
+        log.info("[Service Params] : {}",joinPoint.getSignature());
+        Object[] args = joinPoint.getArgs();
+        if (args==null){
+            log.info("[Service Args] is NULL : {}", "NULL");
+        }else {
+            log.info("[Service Method] Args : " + Arrays.toString(args));
+        }
+        log.info("-------------------Service Content-------------------");
+        log.info("\n");
     }
+
 
     /**
      * 异常通知 记录controller抛异常的信息.
@@ -94,12 +107,20 @@ public class WebLogAspect {
      */
     @AfterThrowing(value = "webControllerLog()",throwing = "error")
     public void controllerAfterThrowing(JoinPoint joinPoint,Throwable error){
+        log.info("\n");
         log.error("-------------------Controller Throwable Content-------------------");
         log.error("[Controller Throwable Class] : {}",error.getClass().getName());
         log.error("[Controller Throwable Msg] : {}",error.getMessage());
         log.error("[Controller Throwable Method] : {}->{}()",joinPoint.getTarget().getClass().getName(),joinPoint.getSignature().getName());
+        Object[] args = joinPoint.getArgs();
+        if (args==null){
+            log.info("[Service Args] is NULL : {}", "NULL");
+        }else {
+            log.info("[Service Method] Args : " + Arrays.toString(args));
+        }
         log.error("[Controller Throwable Method Args] : {}",joinPoint.getArgs());
         log.error("-------------------Controller Throwable Content-------------------");
+        log.info("\n");
     }
 
 
