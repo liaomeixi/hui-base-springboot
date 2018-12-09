@@ -24,6 +24,11 @@
         <!-- 生成 JavaBean 对象继承 Serializable 类 -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
 
+        <!--test-->
+        <plugin type="com.hui.mybatis.plugins.BatchInsertPlugin"/>
+        <plugin type="com.hui.mybatis.plugins.SelectPageKeyPlugin"/>
+        <plugin type="com.hui.mybatis.plugins.PostGreSQLReturnKeyPlugin"/>
+
         <!-- 生成 JavaBean 对象重写 equals 和 hashCode 方法 -->
         <!-- <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" /> -->
 
@@ -34,7 +39,7 @@
 
         <!-- jdbc 连接配置 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/springcloud?characterEncoding=UTF-8"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/springcloud_test?characterEncoding=UTF-8"
                         userId="root"
                         password="123456">
         </jdbcConnection>
@@ -59,13 +64,13 @@
         </table>-->
 
 
-        <table tableName="hui_msg_message" domainObjectName="Message"
+        <table tableName="t_hui_order" domainObjectName="Order"
             enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
             enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
         </table>
 
-        <table tableName="hui_account_user" domainObjectName="User"
+        <table tableName="t_hui_product" domainObjectName="Product"
            enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
            enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
