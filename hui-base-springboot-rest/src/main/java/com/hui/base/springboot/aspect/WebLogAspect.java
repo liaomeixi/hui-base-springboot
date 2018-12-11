@@ -22,7 +22,7 @@ import java.util.Arrays;
  */
 @Component
 @Aspect
-@Order(value = 1)
+//@Order(value = 1)
 @Slf4j
 public class WebLogAspect {
 
