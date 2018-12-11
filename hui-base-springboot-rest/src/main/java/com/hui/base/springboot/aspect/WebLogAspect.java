@@ -14,7 +14,7 @@ import java.util.Arrays;
 /**
  * <b><code>WebLogAspect</code></b>
  * <p/>
- * Description: 日志收集拦截器
+ * Description: 日志收集切面
  * <p/>
  * <b>Creation Time:</b> 2018/12/4 22:14.
  *
