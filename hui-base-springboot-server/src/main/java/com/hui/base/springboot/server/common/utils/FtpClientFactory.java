@@ -26,6 +26,9 @@ import java.io.IOException;
 @Data
 public class FtpClientFactory extends BasePooledObjectFactory<FTPClient> {
 
+    /**
+     * The Ftp client config.
+     */
     @Resource
     private FtpClientConfig ftpClientConfig;
 

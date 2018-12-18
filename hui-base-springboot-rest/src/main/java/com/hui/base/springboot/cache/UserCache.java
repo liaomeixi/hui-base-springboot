@@ -21,7 +21,7 @@ public class UserCache {
      *
      * @return the cache
      * @author : Hu weihui
-     * @since nile -cmszbs-szcst 0.1.0
+     * @since hui_project v1
      */
     @Bean
     public Cache<String,String> getUserCache(){

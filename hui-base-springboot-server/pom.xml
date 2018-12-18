@@ -53,10 +53,10 @@
         </dependency>
 
         <!--PG SQL-->
-        <!--<dependency>
+        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!--Mysql-->
         <dependency>
