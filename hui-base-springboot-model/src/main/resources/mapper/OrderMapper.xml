@@ -5,29 +5,30 @@
     <id column="order_id" jdbcType="VARCHAR" property="orderId" />
     <result column="order_name" jdbcType="VARCHAR" property="orderName" />
     <result column="product_id" jdbcType="VARCHAR" property="productId" />
-    <result column="buy_quantity" jdbcType="INTEGER" property="buyQuantity" />
+    <result column="buy_quantity" jdbcType="DECIMAL" property="buyQuantity" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    order_id, order_name, product_id, buy_quantity
+    order_id, order_name, product_id, buy_quantity, created_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from t_hui_order
+    from T_HUI_ORDER
     where order_id = #{orderId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from t_hui_order
+    delete from T_HUI_ORDER
     where order_id = #{orderId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.hui.base.springboot.model.Order">
-    insert into t_hui_order (order_id, order_name, product_id, 
-      buy_quantity)
+    insert into T_HUI_ORDER (order_id, order_name, product_id, 
+      buy_quantity, created_time)
     values (#{orderId,jdbcType=VARCHAR}, #{orderName,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
-      #{buyQuantity,jdbcType=INTEGER})
+      #{buyQuantity,jdbcType=DECIMAL}, #{createdTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hui.base.springboot.model.Order">
-    insert into t_hui_order
+    insert into T_HUI_ORDER
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
         order_id,
@@ -41,6 +42,9 @@
       <if test="buyQuantity != null">
         buy_quantity,
       </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
@@ -53,12 +57,15 @@
         #{productId,jdbcType=VARCHAR},
       </if>
       <if test="buyQuantity != null">
-        #{buyQuantity,jdbcType=INTEGER},
+        #{buyQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.hui.base.springboot.model.Order">
-    update t_hui_order
+    update T_HUI_ORDER
     <set>
       <if test="orderName != null">
         order_name = #{orderName,jdbcType=VARCHAR},
@@ -67,27 +74,62 @@
         product_id = #{productId,jdbcType=VARCHAR},
       </if>
       <if test="buyQuantity != null">
-        buy_quantity = #{buyQuantity,jdbcType=INTEGER},
+        buy_quantity = #{buyQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where order_id = #{orderId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hui.base.springboot.model.Order">
-    update t_hui_order
+    update T_HUI_ORDER
     set order_name = #{orderName,jdbcType=VARCHAR},
       product_id = #{productId,jdbcType=VARCHAR},
-      buy_quantity = #{buyQuantity,jdbcType=INTEGER}
+      buy_quantity = #{buyQuantity,jdbcType=DECIMAL},
+      created_time = #{createdTime,jdbcType=TIMESTAMP}
     where order_id = #{orderId,jdbcType=VARCHAR}
   </update>
-  <insert id="batchInsert" parameterType="com.hui.base.springboot.model.Order">
-    insert into t_hui_order (order_id, 
-      order_name, product_id, buy_quantity
-      )
-    values <foreach collection="list" item="item" index="index" separator="," > (#{item.orderId,jdbcType=VARCHAR}, 
-      #{item.orderName,jdbcType=VARCHAR}, #{item.productId,jdbcType=VARCHAR}, #{item.buyQuantity,jdbcType=INTEGER}
-      )</foreach>
+  <insert id="batchInsert" parameterType="java.util.List">
+    insert into T_HUI_ORDER (
+    order_id,
+    order_name,
+    product_id,
+    buy_quantity,
+    created_time
+    )
+    values
+    <foreach collection="recordList" index="index" item="item" separator="union all">
+      select
+      (
+      #{item.orderId,jdbcType=VARCHAR},
+      #{item.orderName,jdbcType=VARCHAR},
+      #{item.productId,jdbcType=VARCHAR},
+      #{item.buyQuantity,jdbcType=DECIMAL},
+      #{item.createdTime,jdbcType=TIMESTAMP}
+      )from dual
+    </foreach>
   </insert>
-  <select id="selectByPage" resultMap="BaseResultMap">
-    SELECT <include refid="Base_Column_List" /> FROM t_hui_order LIMIT #{offset},#{limit}
-  </select>
+  <delete id="batchDelete" parameterType="java.lang.String">
+    delete from T_HUI_ORDER where order_id in (
+    <foreach collection="ids" index="index" item="item" separator=",">
+      #{item}
+    </foreach>
+    )
+  </delete>
+  <update id="batchUpdate" parameterType="java.util.List">
+    begin
+    <foreach collection="recordList" index="index" item="item" separator=";">
+      update T_HUI_ORDER
+      <set>
+         order_id = #{item.orderId,jdbcType=VARCHAR},
+         order_idorder_name = #{item.orderName,jdbcType=VARCHAR},
+         order_idorder_nameproduct_id = #{item.productId,jdbcType=VARCHAR},
+         order_idorder_nameproduct_idbuy_quantity = #{item.buyQuantity,jdbcType=DECIMAL},
+         order_idorder_nameproduct_idbuy_quantitycreated_time = #{item.createdTime,jdbcType=TIMESTAMP}
+      </set>
+      where order_id = orderId
+    </foreach>
+    ;end;
+  </update>
 </mapper>

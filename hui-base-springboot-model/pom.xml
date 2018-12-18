@@ -31,6 +31,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.1.0.7.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -68,6 +74,12 @@
                         <groupId>com.hui.mybatis.plugins</groupId>
                         <artifactId>hui-mybatis-plugins</artifactId>
                         <version>0.0.1-SNAPSHOT</version>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>com.oracle</groupId>
+                        <artifactId>ojdbc6</artifactId>
+                        <version>11.1.0.7.0</version>
                     </dependency>
 
                 </dependencies>

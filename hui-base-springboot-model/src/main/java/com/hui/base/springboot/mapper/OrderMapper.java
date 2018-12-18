@@ -17,7 +17,9 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order record);
 
-    void batchInsert(List<Order> recordLst);
+    int batchInsert(@Param("recordList") List<Order> recordList);
 
-    List<Order> selectByPage(@Param("offset") Long offset, @Param("limit") Long limit);
+    int batchDelete(@Param("ids") String[] ids);
+
+    int batchUpdate(@Param("recordList") List<Order> recordList);
 }

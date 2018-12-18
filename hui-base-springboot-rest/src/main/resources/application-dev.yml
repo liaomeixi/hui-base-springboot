@@ -36,6 +36,10 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
 
 logging:
-  path: D:\test\szcst_logs
+  level:
+    com.hui.*: debug
+    org.springfromework.web: debug
+    org.mybatis: debug
+  file: D:\test\szcst_logs
 
 

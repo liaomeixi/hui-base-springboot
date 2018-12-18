@@ -17,7 +17,9 @@ public interface ProductMapper {
 
     int updateByPrimaryKey(Product record);
 
-    void batchInsert(List<Product> recordLst);
+    int batchInsert(@Param("recordList") List<Product> recordList);
 
-    List<Product> selectByPage(@Param("offset") Long offset, @Param("limit") Long limit);
+    int batchDelete(@Param("ids") String[] ids);
+
+    int batchUpdate(@Param("recordList") List<Product> recordList);
 }

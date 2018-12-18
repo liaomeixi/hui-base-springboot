@@ -79,15 +79,43 @@
       product_price = #{productPrice,jdbcType=DECIMAL}
     where product_id = #{productId,jdbcType=VARCHAR}
   </update>
-  <insert id="batchInsert" parameterType="com.hui.base.springboot.model.Product">
-    insert into t_hui_product (product_id, 
-      product_name, product_stock, product_price
+  <insert id="batchInsert" parameterType="java.util.List">
+    insert into t_hui_product (
+    product_id,
+    product_name,
+    product_stock,
+    product_price
+    )
+    values
+    <foreach collection="recordList" index="index" item="item" separator=",">
+      (
+      #{item.productId,jdbcType=VARCHAR},
+      #{item.productName,jdbcType=VARCHAR},
+      #{item.productStock,jdbcType=INTEGER},
+      #{item.productPrice,jdbcType=DECIMAL}
       )
-    values <foreach collection="list" item="item" index="index" separator="," > (#{item.productId,jdbcType=VARCHAR}, 
-      #{item.productName,jdbcType=VARCHAR}, #{item.productStock,jdbcType=INTEGER}, #{item.productPrice,jdbcType=DECIMAL}
-      )</foreach>
+    </foreach>
   </insert>
-  <select id="selectByPage" resultMap="BaseResultMap">
-    SELECT <include refid="Base_Column_List" /> FROM t_hui_product LIMIT #{offset},#{limit}
-  </select>
+  <delete id="batchDelete" parameterType="java.lang.String">
+    delete from t_hui_product where product_id in (
+    <foreach collection="ids" index="index" item="item" separator=",">
+      #{item}
+    </foreach>
+    )
+  </delete>
+  <update id="batchUpdate" parameterType="java.util.List">
+    update t_hui_product
+    <set>
+       product_name = temp.product_name,
+       product_stock = temp.product_stock,
+       product_price = temp.product_price
+    </set>
+    from (values
+    <foreach collection="recordList" index="index" item="item" separator=",">
+      (
+      #{item.productId,jdbcType=VARCHAR},#{item.productName,jdbcType=VARCHAR},#{item.productStock,jdbcType=INTEGER},#{item.productPrice,jdbcType=DECIMAL}
+      )
+    </foreach>
+    ) as temp (product_id,product_name,product_stock,product_price) where t_hui_product.product_id=temp.product_id;
+  </update>
 </mapper>
