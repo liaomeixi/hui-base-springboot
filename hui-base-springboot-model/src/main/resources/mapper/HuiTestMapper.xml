@@ -2,31 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hui.base.springboot.mapper.HuiTestMapper">
   <resultMap id="BaseResultMap" type="com.hui.base.springboot.model.HuiTest">
-    <id column="id" jdbcType="DECIMAL" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name
+    ID, NAME
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from T_HUI_TEST_TEST
-    where id = #{id,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from T_HUI_TEST_TEST
-    where id = #{id,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hui.base.springboot.model.HuiTest" useGeneratedKeys="true">
-    insert into T_HUI_TEST_TEST (name)
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.hui.base.springboot.model.HuiTest" useGeneratedKeys="true">
+    <selectKey keyProperty="ID" order="BEFORE" resultType="java.math.BigDecimal">
+      SELECT T_HUI_TEST_TEST_SEQUENCE.nextval from dual')
+    </selectKey>
+    insert into T_HUI_TEST_TEST (NAME)
     values (#{name,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hui.base.springboot.model.HuiTest" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.hui.base.springboot.model.HuiTest" useGeneratedKeys="true">
+    <selectKey keyProperty="ID" order="BEFORE" resultType="java.math.BigDecimal">
+      SELECT T_HUI_TEST_TEST_SEQUENCE.nextval from dual')
+    </selectKey>
     insert into T_HUI_TEST_TEST
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
-        name,
+        NAME,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -39,30 +45,34 @@
     update T_HUI_TEST_TEST
     <set>
       <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+        NAME = #{name,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hui.base.springboot.model.HuiTest">
     update T_HUI_TEST_TEST
-    set name = #{name,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=DECIMAL}
+    set NAME = #{name,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
   </update>
   <insert id="batchInsert" parameterType="java.util.List">
     insert into T_HUI_TEST_TEST (
-    name
+    ID,
+    NAME
     )
-    values
+    (
     <foreach collection="recordList" index="index" item="item" separator="union all">
-      select
       (
+      select
+      T_HUI_TEST_TEST_SEQUENCE.nextval,
       #{item.name,jdbcType=VARCHAR}
-      )from dual
+      from dual
+      )
     </foreach>
+    )
   </insert>
   <delete id="batchDelete" parameterType="java.math.BigDecimal">
-    delete from T_HUI_TEST_TEST where id in (
+    delete from T_HUI_TEST_TEST where ID in (
     <foreach collection="ids" index="index" item="item" separator=",">
       #{item}
     </foreach>
@@ -73,9 +83,9 @@
     <foreach collection="recordList" index="index" item="item" separator=";">
       update T_HUI_TEST_TEST
       <set>
-         name = #{item.name,jdbcType=VARCHAR}
+         NAME = #{item.name,jdbcType=VARCHAR}
       </set>
-      where id = id
+      where ID = #{item.id,jdbcType=DECIMAL}
     </foreach>
     ;end;
   </update>

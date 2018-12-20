@@ -50,19 +50,22 @@ public class ServiceTest {
     @Test
     public void testAdd()throws Exception{
         Order order  = new Order();
-        order.setBuyQuantity(111111);
+        order.setBuyQuantity(11);
         order.setOrderId("1");
         order.setOrderName("1");
 
         Order order2  = new Order();
-        order2.setBuyQuantity(222222);
+        order2.setBuyQuantity(22);
         order2.setOrderId("2");
         order2.setOrderName("2");
+        order2.setCreatedTime(new Date());
 
         List<Order> orders = new ArrayList<>();
         orders.add(order);
         orders.add(order2);
         orderMapper.batchInsert(orders);
+        System.out.println(order.getOrderId());
+        System.out.println(order2.getOrderId());
 
 
         HuiTest test = new HuiTest();
@@ -70,6 +73,7 @@ public class ServiceTest {
         List<HuiTest> huiTests = new ArrayList<>();
         huiTests.add(test);
         testMapper.batchInsert(huiTests);
+        System.out.println(test.getId());
 
     }
 
@@ -86,13 +90,13 @@ public class ServiceTest {
     @Test
     public void testUpdate()throws Exception{
         Order order  = new Order();
-        order.setBuyQuantity(111111);
+        order.setBuyQuantity(11);
         order.setOrderId("1");
         order.setOrderName("xxxx");
         order.setCreatedTime(new Date());
 
         Order order2  = new Order();
-        order2.setBuyQuantity(222222);
+        order2.setBuyQuantity(22);
         order2.setOrderId("2");
         order2.setOrderName("yyyy");
         order2.setCreatedTime(new Date());
@@ -103,7 +107,7 @@ public class ServiceTest {
         orderMapper.batchUpdate(orders);
 
         HuiTest test = new HuiTest();
-        test.setId(new BigDecimal(2));
+        test.setId(new BigDecimal(3));
         test.setName("hui2222");
         List<HuiTest> huiTests = new ArrayList<>();
         huiTests.add(test);
