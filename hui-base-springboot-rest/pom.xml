@@ -49,17 +49,13 @@
     </profiles>
 
     <dependencies>
-        <!-- modules -->
-        <dependency>
-            <groupId>com.hui.base</groupId>
-            <artifactId>hui-base-springboot-model</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
+        <!-- sys -->
         <dependency>
             <groupId>com.hui.base</groupId>
             <artifactId>hui-base-springboot-server</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
         <!--spring boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -85,10 +81,16 @@
             <optional>true</optional>
             <scope>true</scope>
         </dependency>
+
         <!-- test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <!--aop-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
         <!-- Swagger -->
@@ -126,21 +128,36 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
-        <!--aop-->
+        <!--PG SQL-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
 
-        <!-- FTP传输 -->
+        <!--Mysql-->
         <dependency>
-            <groupId>commons-net</groupId>
-            <artifactId>commons-net</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
+        <!--ORACLE-->
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
         </dependency>
+
+        <!--druid连接池-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- pagehelper -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hui.base.springboot.mapper.HuiTestMapper">
-  <resultMap id="BaseResultMap" type="com.hui.base.springboot.model.HuiTest">
+  <resultMap id="BaseResultMap" type="com.hui.base.springboot.entity.HuiTest">
     <id column="ID" jdbcType="DECIMAL" property="id" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
   </resultMap>
@@ -18,14 +18,14 @@
     delete from T_HUI_TEST_TEST
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.hui.base.springboot.model.HuiTest" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.hui.base.springboot.entity.HuiTest" useGeneratedKeys="true">
     <selectKey keyProperty="ID" order="BEFORE" resultType="java.math.BigDecimal">
       SELECT T_HUI_TEST_TEST_SEQUENCE.nextval from dual')
     </selectKey>
     insert into T_HUI_TEST_TEST (NAME)
     values (#{name,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.hui.base.springboot.model.HuiTest" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.hui.base.springboot.entity.HuiTest" useGeneratedKeys="true">
     <selectKey keyProperty="ID" order="BEFORE" resultType="java.math.BigDecimal">
       SELECT T_HUI_TEST_TEST_SEQUENCE.nextval from dual')
     </selectKey>
@@ -41,7 +41,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hui.base.springboot.model.HuiTest">
+  <update id="updateByPrimaryKeySelective" parameterType="com.hui.base.springboot.entity.HuiTest">
     update T_HUI_TEST_TEST
     <set>
       <if test="name != null">
@@ -50,7 +50,7 @@
     </set>
     where ID = #{id,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hui.base.springboot.model.HuiTest">
+  <update id="updateByPrimaryKey" parameterType="com.hui.base.springboot.entity.HuiTest">
     update T_HUI_TEST_TEST
     set NAME = #{name,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=DECIMAL}

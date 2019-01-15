@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hui.base.springboot.mapper.OrderMapper">
-  <resultMap id="BaseResultMap" type="com.hui.base.springboot.model.Order">
+  <resultMap id="BaseResultMap" type="com.hui.base.springboot.entity.Order">
     <id column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
     <result column="ORDER_NAME" jdbcType="VARCHAR" property="orderName" />
     <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
@@ -21,7 +21,7 @@
     delete from T_HUI_ORDER
     where ORDER_ID = #{orderId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.hui.base.springboot.model.Order">
+  <insert id="insert" parameterType="com.hui.base.springboot.entity.Order">
     <selectKey keyProperty="ORDER_ID" order="BEFORE" resultType="java.lang.String">
       SELECT T_HUI_ORDER_SEQUENCE.nextval from dual')
     </selectKey>
@@ -30,7 +30,7 @@
     values (#{orderId,jdbcType=VARCHAR}, #{orderName,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
       #{buyQuantity,jdbcType=DECIMAL}, #{createdTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.hui.base.springboot.model.Order">
+  <insert id="insertSelective" parameterType="com.hui.base.springboot.entity.Order">
     <selectKey keyProperty="ORDER_ID" order="BEFORE" resultType="java.lang.String">
       SELECT T_HUI_ORDER_SEQUENCE.nextval from dual')
     </selectKey>
@@ -70,7 +70,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hui.base.springboot.model.Order">
+  <update id="updateByPrimaryKeySelective" parameterType="com.hui.base.springboot.entity.Order">
     update T_HUI_ORDER
     <set>
       <if test="orderName != null">
@@ -88,7 +88,7 @@
     </set>
     where ORDER_ID = #{orderId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hui.base.springboot.model.Order">
+  <update id="updateByPrimaryKey" parameterType="com.hui.base.springboot.entity.Order">
     update T_HUI_ORDER
     set ORDER_NAME = #{orderName,jdbcType=VARCHAR},
       PRODUCT_ID = #{productId,jdbcType=VARCHAR},

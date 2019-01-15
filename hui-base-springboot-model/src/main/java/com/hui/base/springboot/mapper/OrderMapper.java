@@ -1,6 +1,6 @@
 package com.hui.base.springboot.mapper;
 
-import com.hui.base.springboot.model.Order;
+import com.hui.base.springboot.entity.Order;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

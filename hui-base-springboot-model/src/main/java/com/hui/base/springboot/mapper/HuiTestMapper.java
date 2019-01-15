@@ -1,6 +1,6 @@
 package com.hui.base.springboot.mapper;
 
-import com.hui.base.springboot.model.HuiTest;
+import com.hui.base.springboot.entity.HuiTest;
 import java.math.BigDecimal;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;

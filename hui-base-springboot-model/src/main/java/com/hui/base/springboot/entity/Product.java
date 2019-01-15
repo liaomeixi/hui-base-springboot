@@ -1,4 +1,4 @@
-package com.hui.base.springboot.model;
+package com.hui.base.springboot.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

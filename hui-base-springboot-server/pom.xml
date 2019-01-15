@@ -14,17 +14,8 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!-- FTP传输 -->
-        <dependency>
-            <groupId>commons-net</groupId>
-            <artifactId>commons-net</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
-        </dependency>
 
-        <!--hui-base-springboot-->
+        <!--sys-->
         <dependency>
             <groupId>com.hui.base</groupId>
             <artifactId>hui-base-springboot-model</artifactId>
@@ -45,32 +36,11 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
-
-        <!--log -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
 
-        <!--PG SQL-->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-        </dependency>
-
-        <!--Mysql-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.44</version>
-        </dependency>
-
-        <!--ORACLE-->
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>11.1.0.7.0</version>
-        </dependency>
         <!--H2-->
         <dependency>
             <groupId>com.h2database</groupId>
@@ -78,24 +48,13 @@
             <scope>test</scope>
         </dependency>
 
-        <!--druid连接池-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-        </dependency>
-
-        <!-- pagehelper -->
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
-        </dependency>
-
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <optional>true</optional>
+            <scope>true</scope>
         </dependency>
-
 
     </dependencies>
 

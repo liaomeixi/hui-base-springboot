@@ -2,21 +2,18 @@ package com.hui.base.springboot.server.service.user.impl;
 
 import com.hui.base.springboot.mapper.HuiTestMapper;
 import com.hui.base.springboot.mapper.OrderMapper;
-import com.hui.base.springboot.model.HuiTest;
-import com.hui.base.springboot.model.Order;
+import com.hui.base.springboot.entity.HuiTest;
+import com.hui.base.springboot.entity.Order;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.runner.RunWith;
-import org.mockito.internal.matchers.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hui.base.springboot.mapper.ProductMapper">
-  <resultMap id="BaseResultMap" type="com.hui.base.springboot.model.Product">
+  <resultMap id="BaseResultMap" type="com.hui.base.springboot.entity.Product">
     <id column="product_id" jdbcType="VARCHAR" property="productId" />
     <result column="product_name" jdbcType="VARCHAR" property="productName" />
     <result column="product_stock" jdbcType="INTEGER" property="productStock" />
@@ -20,13 +20,13 @@
     delete from t_hui_product
     where product_id = #{productId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.hui.base.springboot.model.Product">
+  <insert id="insert" parameterType="com.hui.base.springboot.entity.Product">
     insert into t_hui_product (product_id, product_name, product_stock, 
       product_price)
     values (#{productId,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{productStock,jdbcType=INTEGER}, 
       #{productPrice,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.hui.base.springboot.model.Product">
+  <insert id="insertSelective" parameterType="com.hui.base.springboot.entity.Product">
     insert into t_hui_product
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="productId != null">
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hui.base.springboot.model.Product">
+  <update id="updateByPrimaryKeySelective" parameterType="com.hui.base.springboot.entity.Product">
     update t_hui_product
     <set>
       <if test="productName != null">
@@ -72,7 +72,7 @@
     </set>
     where product_id = #{productId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hui.base.springboot.model.Product">
+  <update id="updateByPrimaryKey" parameterType="com.hui.base.springboot.entity.Product">
     update t_hui_product
     set product_name = #{productName,jdbcType=VARCHAR},
       product_stock = #{productStock,jdbcType=INTEGER},
