@@ -9,11 +9,24 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>hui-base-springboot-model</artifactId>
-    <version>${project.parent.version}</version>
-    <packaging>jar</packaging>
+    <artifactId>hui-base-springboot-dao</artifactId>
 
     <dependencies>
+
+        <!-- sys -->
+        <dependency>
+            <groupId>com.hui.base</groupId>
+            <artifactId>hui-base-springboot-model</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <!--mybatis -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis.spring.boot.starter.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -22,8 +35,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
         </dependency>
 
     </dependencies>
@@ -37,7 +50,7 @@
                 <configuration>
                     <!-- 配置文件 -->
                     <configurationFile>
-                        ../hui-base-springboot-dao/src/main/resources/generator/generatorConfig.xml
+                        ${basedir}/src/main/resources/generator/generatorConfig.xml
                     </configurationFile>
                     <!-- 允许移动生成的文件 -->
                     <verbose>true</verbose>
@@ -75,6 +88,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

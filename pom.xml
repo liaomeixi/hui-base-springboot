@@ -13,6 +13,7 @@
         <module>hui-base-springboot-server</module>
         <module>hui-base-springboot-rest</module>
         <module>hui-base-springboot-common</module>
+        <module>hui-base-springboot-dao</module>
     </modules>
 
     <parent>
